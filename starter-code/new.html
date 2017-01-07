@@ -11,6 +11,19 @@
     <link rel="stylesheet" href="styles/modules.css">
     <!-- REVIEW: This is the stylesheet for the syntax highlighting -->
     <link rel="stylesheet" href="vendor/styles/railscasts.css">
+    <script id="article-template" type="text/x-handlebars-template">
+      <article class="clearfix" data-author="{{author}}" data-category="{{category}}">
+        <header>
+          <h1>{{title}}</h1>
+          <div class="byline">
+            By <address><a href="{{authorUrl}}">{{author}}</a></address>
+            {{publishStatus}}
+          </div>
+        </header>
+        <pre><code><section class="article-body">{{{body}}}</section></code></pre>
+        <a href="#" class="read-on">Read on &rarr;</a>
+      </article>
+    </script>
   </head>
 
   <body>

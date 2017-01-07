@@ -67,24 +67,46 @@ articleView.setTeasers = function() {
 articleView.initNewArticlePage = function() {
   // TODO: Ensure the main .tab-content area is revealed. We might add more tabs later.
 
-  // TODO: The new articles we create will be copy/pasted into our source data file.
+  // TODO: The new articles we create will be copy/pasted into our source data file, blogArticles.js.
   // Set up this "export" functionality. We can hide the export field for now, and show it once we have data to export.
 
   // TODO: Add an event listener/handler to update the preview and the export field if any inputs change.
 };
 
 articleView.create = function() {
-  // TODO: Set up a var to hold the new article we are creating.
+  // DONE: Set up a var to hold the new article we are creating.
   // Clear out the #articles element, so we can put in the updated preview
+  $('#articles').text('');
+  var newArticle = {};
+  // Done: Instantiate an article based on what's in the form fields:
+  newArticle.author = $('#article-author').val();
+  newArticle.authorUrl = $('#article-author-url').val();
+  newArticle.title = $('#article-title').val();
+  newArticle.category = $('#article-category').val();
+  newArticle.body = $('#article-body').val();
+  newArticle.publishedOn = $('#article-published').val();
+  var newBlog = new Article(newArticle);
 
-  // TODO: Instantiate an article based on what's in the form fields:
 
-  // TODO: Use our interface to the Handblebars template to put this new article into the DOM:
+  // DONE: Use our interface to the Handblebars template to put this new article into the DOM:
+$('#articles').append(newBlog.toHtml());
 
-  // TODO: Activate the highlighting of any code blocks:
+  // DONE: Activate the highlighting of any code blocks:
+  $(document).ready(function() {
+    $('pre code').each(function(i, block) {
+      hljs.highlightBlock(block);
+    });
+  });
 
-  // TODO: Export the new article as JSON, so it's ready to copy/paste into blogArticles.js:
+  // DONE: Export the new article as JSON, so it's ready to copy/paste into blogArticles.js:
+
+  $('#article-json').val(JSON.stringify(newBlog));
+$('#article-json').on('focus',function (){
+  $(this).select();
+});
+
 };
+
 
 
 articleView.initIndexPage = function() {
